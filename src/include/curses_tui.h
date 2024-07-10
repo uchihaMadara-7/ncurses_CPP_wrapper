@@ -17,9 +17,6 @@
 #include <string>
 #include <utility>
 
-/* custom imports */
-#include "logger.h"
-
 #define CURSOR_INVISIBLE 0
 #define CURSOR_VISIBLE_NORMAL 1
 #define CURSOR_INVISIBLE_HIGH 2
@@ -35,6 +32,16 @@
 #define KEY_SPACE 32
 #define KEY_INSERT_1 105
 #define KEY_INSERT_2 97
+
+/* border definition for sides and corners */
+#define BORDER_LS '|'
+#define BORDER_RS '|'
+#define BORDER_TS '-'
+#define BORDER_BS '-'
+#define BORDER_TL '+'
+#define BORDER_TR '+'
+#define BORDER_BL '+'
+#define BORDER_BR '+'
 
 #define LINE_COLOR 1
 #define INVALID_COLOR 2
@@ -60,6 +67,10 @@ class CursesWindow {
     int get_cursor_x();
     int get_cursor_y();
     WINDOW* get_window();
+
+    void set_border(char ls = BORDER_LS, char rs = BORDER_RS,
+        char ts = BORDER_TS, char bs = BORDER_BS, char tl = BORDER_TL,
+        char tr = BORDER_TR, char bl = BORDER_BL, char br = BORDER_BR);
 
     int read();
     void print(int c);

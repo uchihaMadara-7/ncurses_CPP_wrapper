@@ -7,7 +7,6 @@
 
 /* custom imports */
 #include "include/curses_tui.h"
-#include "include/logger.h"
 
 /* Initialize the static member */
 bool CursesWindow::m_initialized = false;
@@ -15,7 +14,6 @@ bool CursesWindow::m_initialized = false;
 CursesWindow::CursesWindow() {
     init();
     // m_win = stdscr;
-    // DEBUG_TRACE("(%d, %d) (%d, %d)", rows, cols, starty, startx);
     // m_win = newwin(rows, cols, starty, startx);
     // box(m_win, '|', '-');
     // wrefresh(m_win);
@@ -30,7 +28,6 @@ CursesWindow::~CursesWindow() {
 
 void CursesWindow::init() {
     if (!m_initialized) {
-        DEBUG_TRACE("Initialised once!");
         /* Initialises the screen */
         ::initscr();
         /* Allow handling of control characters like arrow keys, enter, ... */
@@ -111,6 +108,14 @@ int CursesWindow::get_cursor_y() {
 
 WINDOW* CursesWindow::get_window() {
     return m_win;
+}
+
+/* void set_border(char ls = BORDER_LS, char rs = BORDER_RS,
+    char ts = BORDER_TS, char bs = BORDER_BS, char tl = BORDER_TL,
+    char tr = BORDER_TR, char bl = BORDER_BL, char br = BORDER_BR); */
+void CursesWindow::set_border(char ls, char rs, char ts, char bs,
+    char tl, char tr, char bl, char br) {
+    ::wborder(m_win, ls, rs, ts, bs, tl, tr, bl, br);
 }
 
 int CursesWindow::read() {
