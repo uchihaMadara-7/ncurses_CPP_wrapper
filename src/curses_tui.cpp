@@ -69,6 +69,10 @@ void CursesWindow::cursor_mode(int mode) {
     ::curs_set(mode);
 }
 
+void CursesWindow::nodelay() {
+    ::nodelay(m_win, TRUE);
+}
+
 void CursesWindow::clear() {
     ::wclear(m_win);
 }
@@ -116,9 +120,14 @@ WINDOW* CursesWindow::get_window() {
 void CursesWindow::set_border(char ls, char rs, char ts, char bs,
     char tl, char tr, char bl, char br) {
     ::wborder(m_win, ls, rs, ts, bs, tl, tr, bl, br);
+    ::wrefresh(m_win);
 }
 
-int CursesWindow::read() {
+void CursesWindow::refresh() {
+    ::wrefresh(m_win);
+}
+
+int CursesWindow::read() const {
     return ::wgetch(m_win);
 }
 

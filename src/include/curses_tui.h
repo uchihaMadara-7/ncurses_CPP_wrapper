@@ -56,6 +56,7 @@ class CursesWindow {
     void cbreak();
     void set_echo(bool flag);
     void cursor_mode(int mode);
+    void nodelay();
     void clear();
     void move(int y, int x);
     void movex(int x);
@@ -72,7 +73,8 @@ class CursesWindow {
         char ts = BORDER_TS, char bs = BORDER_BS, char tl = BORDER_TL,
         char tr = BORDER_TR, char bl = BORDER_BL, char br = BORDER_BR);
 
-    int read();
+    void refresh();
+    int read() const;
     void print(int c);
     void print(int y, int x, int c);
     void print(std::string msg);
